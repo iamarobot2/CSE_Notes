@@ -1,6 +1,6 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-var yourToken = ;
+var yourToken = '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';
 
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
