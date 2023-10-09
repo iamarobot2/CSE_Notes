@@ -1,6 +1,11 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-var yourToken = process.env.CSE_NOTES;
+fetch('http://localhost:3000/api/token')
+  .then(response => response.json())
+  .then(data => {
+    var yourToken = data.token;
+  });
+
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
     .then(response => response.json())
@@ -60,8 +65,6 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
             });
         }
     }
-    
-
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     var title = document.getElementById('title').value;
