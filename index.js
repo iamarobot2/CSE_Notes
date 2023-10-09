@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/api/token', (req, res) => {
-    const token = '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';
+    const token = process.env.CSE_NOTES;
     res.json({ token: token });
 });
 
