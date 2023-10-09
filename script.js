@@ -28,22 +28,39 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
         document.getElementById('searchButton').addEventListener('click', searchNotes);
     });
 
-function deleteFile(path, sha) {
-    var data = {
-        message: 'Delete ' + path,
-        sha: sha
-    };
-    fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': 'token ' + yourToken,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));
-}
+    function deleteFile(path, sha) {
+        var confirmDelete = confirm('Are you sure you want to delete this file?');
+        if (confirmDelete) {
+            var data = {
+                message: 'Delete ' + path,
+                sha: sha
+            };
+            fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'token ' + yourToken,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                alert('File was successfully deleted');
+                location.reload(); // Refresh the page
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                alert('Error: File was not deleted');
+            });
+        }
+    }
+    
 
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -74,7 +91,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
         .then(data => {
             console.log(data);
             alert('Document was successfully uploaded');
-            location.reload(); // Refresh the page
+            location.reload();
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -105,6 +122,16 @@ function searchNotes() {
         firstMatch.scrollIntoView({behavior: "smooth"});
     }
 }
+window.onload = function() {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        document.getElementById('logoutButton').style.display = 'block';
+    }
+};
+document.getElementById('logoutButton').addEventListener('click', function() {
+    localStorage.setItem('isLoggedIn', 'false');
+    location.reload();
+    this.style.display = 'none';
+});
 
 
 
