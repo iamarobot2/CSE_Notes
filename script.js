@@ -1,4 +1,3 @@
-// script.js
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
 var yourToken = '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';
@@ -12,7 +11,7 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
                 var card = document.createElement('div');
                 card.className = 'card col-md-4 p-3';
                 card.innerHTML = `
-                    <img src="/resource/pdf_icon.png" alt="PDF Icon" style="width:30%">
+                    <img src="resource/pdf_icon.png" alt="PDF Icon" style="width:30%">
                     <div class="container mt-3">
                         <h4><b>${item.name}</b></h4> 
                         <p>Description of the document.</p> 
@@ -24,6 +23,9 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
                 cards.appendChild(card);
             }
         });
+    })
+    .then(() => {
+        document.getElementById('searchButton').addEventListener('click', searchNotes);
     });
 
 function deleteFile(path, sha) {
@@ -68,3 +70,26 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
     };
     reader.readAsDataURL(file);
 });
+function searchNotes() {
+    var searchQuery = document.getElementById('search').value.toLowerCase();
+    var cards = document.getElementsByClassName('card');
+    var firstMatch = null;
+    for (var i = 0; i < cards.length; i++) {
+        var title = cards[i].getElementsByTagName('b')[0].innerText.toLowerCase();
+        var pdfName = cards[i].getElementsByTagName('a')[0].href.split('/').pop().toLowerCase();
+        if (title.includes(searchQuery) || pdfName.includes(searchQuery)) {
+            cards[i].style.display = '';
+            if (!firstMatch) {
+                firstMatch = cards[i];
+            }
+        } else {
+            cards[i].style.display = 'none';
+        }
+    }
+    if (firstMatch) {
+        firstMatch.scrollIntoView({behavior: "smooth"});
+    }
+}
+
+
+
