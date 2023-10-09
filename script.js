@@ -1,10 +1,6 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-fetch('http://localhost:3000/api/token')
-  .then(response => response.json())
-  .then(data => {
-    var yourToken = data.token;
-  });
+var yourToken = ;
 
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
