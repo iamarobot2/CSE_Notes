@@ -10,11 +10,27 @@ body {
     background-color: #f4f4f4;
 }
 
+.img-fluid.classphoto {
+    display: block;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.img-fluid.classphoto:hover {
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+    transform: scale(0.95); /* Zoom out */
+}
+
+
 .container {
     max-width: 960px;
     margin: auto;
     overflow: auto;
     padding: 0 2rem;
+    padding-top: 2rem;
 }
 
 .card {
