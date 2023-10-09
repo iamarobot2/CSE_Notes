@@ -1,6 +1,6 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-var yourToken = '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';
+var yourToken = process.env.CSE_NOTES;
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
     .then(response => response.json())
