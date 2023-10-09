@@ -1,6 +1,6 @@
 
-var user = 'username';
-var repo = 'repository';
+var user = 'iamarobot2';
+var repo = 'https://github.com/iamarobot2/CSE_Notes';
 
 fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents')
     .then(response => response.json())
