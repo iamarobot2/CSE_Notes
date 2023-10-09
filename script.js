@@ -15,8 +15,11 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
                     <div class="container mt-3">
                         <h4><b>${item.name}</b></h4> 
                         <p>Description of the document.</p> 
-                        <a href="${item.download_url}" target="_blank" class="btn btn-primary">Open Document</a>
-                    </div>`;
+                        <a href="${item.download_url}" target="_blank" class="btn btn-primary">Download Note</a>`;
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    card.innerHTML += `<button onclick="deleteFile('${item.path}', '${item.sha}')" class="btn btn-danger">Delete</button>`;
+                }
+                card.innerHTML += `</div>`;
                 cards.appendChild(card);
             }
         });

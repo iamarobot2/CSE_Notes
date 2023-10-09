@@ -4,8 +4,10 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     var password = document.getElementById('password').value;
     
     if (username === 'Avin Joshy' && password === 'Iamgroot@4129') {
+        localStorage.setItem('isLoggedIn', 'true');
         window.location.href = 'index.html';
     } else {
         alert('Invalid username or password');
     }
 });
+
