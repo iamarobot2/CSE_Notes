@@ -1,6 +1,6 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-var yourToken = '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';
+var yourToken = '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';
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
     .then(response => response.json())
