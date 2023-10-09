@@ -11,7 +11,7 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
                 var card = document.createElement('div');
                 card.className = 'card col-md-4 p-3';
                 card.innerHTML = `
-                    <img src="pdf_icon.png" alt="PDF Icon" style="width:100%">
+                    <img src="/resource/pdf_icon.png" alt="PDF Icon" style="width:30%">
                     <div class="container mt-3">
                         <h4><b>${item.name}</b></h4> 
                         <p>Description of the document.</p> 
