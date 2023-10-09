@@ -68,3 +68,9 @@ h2 {
         margin-bottom: 1rem;
     }
 }
+.loginbtn
+{
+    background-color:black;
+    color: white;
+    border: none;
+}

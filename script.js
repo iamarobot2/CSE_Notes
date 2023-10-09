@@ -40,7 +40,7 @@ function deleteFile(path, sha) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => console.log(data));.github
 }
 
 document.getElementById('uploadForm').addEventListener('submit', function(event) {

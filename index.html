@@ -14,28 +14,51 @@
 <div class="container">
     <div class="row" id="cards"></div>
 </div>
-
-<div class="m-3">
-    <h2>Upload Notes Here</h2>
-    <p style="text-align: center;font-weight: 600;color: red;">Don't Upload Rubbish Here !</p>
-    <br>
-    <form id="uploadForm">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" required placeholder="Subjectname_modulenumber">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" required>
-        </div>
-        <div class="form-group">
-            <label for="file">File</label>
-            <input type="file" class="form-control-file" id="file" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+<div style="margin-bottom: 25px;">
+    <div class="m-3">
+        <h2>Upload Notes Here</h2>
+        <p style="text-align: center;font-weight: 600;color: red;">Don't Upload Rubbish Here !</p>
+        <br>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" required placeholder="Subjectname_modulenumber">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" required>
+            </div>
+            <div class="form-group">
+                <label for="file">File</label>
+                <input type="file" class="form-control-file" id="file" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
 </div>
-<button onclick="location.href='login.html'" type="button">Login</button>
+<footer style="background-color: black;color: white;padding:30px;">
+  <div class="container p-4">
+    <section class="">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Contact</h5>
+          <ul class="list-unstyled mb-0">
+            <li>
+              <h6>Avin Joshy</h6>
+            </li>
+            <li>
+              Phone: <a href="tel:+8137954129">8137954129</a>
+            </li>
+            <li>
+              Email: <a href="mailto:avinjoshy@gmail.com">avinjoshy@gmail.com</a>
+            </li>
+          </ul>
+          <button class="loginbtn" onclick="location.href='login.html'" type="button">Login</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</footer>
 <script src="script.js"></script>
 </body>
 </html>
