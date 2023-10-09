@@ -1,6 +1,6 @@
 
 var user = 'iamarobot2';
-var repo = 'https://github.com/iamarobot2/CSE_Notes';
+var repo = 'https://github.com/iamarobot2/CSE_Notes/tree/main/notes';
 
 fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents')
     .then(response => response.json())
@@ -26,5 +26,24 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
     event.preventDefault();
     var title = document.getElementById('title').value;
     var file = document.getElementById('file').files[0];
-    // TODO: Upload file to GitHub
+var reader = new FileReader();
+reader.onload = function() {
+    var content = reader.result.split(',')[1];
+    var data = {
+        message: 'Upload from website',
+        content: content
+    };
+    fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + file.name, {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'token ' + yourToken,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
+};
+reader.readAsDataURL(file);
+
 });
