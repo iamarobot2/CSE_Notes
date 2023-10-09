@@ -48,13 +48,13 @@ function deleteFile(path, sha) {
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     var title = document.getElementById('title').value;
-    var description = document.getElementById('description').value; // Get the description
+    var description = document.getElementById('description').value;
     var file = document.getElementById('file').files[0];
     var reader = new FileReader();
     reader.onload = function() {
         var content = reader.result.split(',')[1];
         var data = {
-            message: description, // Use the description as the commit message
+            message: description,
             content: content
         };
         fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/notes/' + file.name, {
@@ -65,11 +65,26 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => console.log(data));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert('Document was successfully uploaded');
+            location.reload(); // Refresh the page
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            alert('Error: Document was not uploaded');
+        });
     };
     reader.readAsDataURL(file);
 });
+
+
 function searchNotes() {
     var searchQuery = document.getElementById('search').value.toLowerCase();
     var cards = document.getElementsByClassName('card');
