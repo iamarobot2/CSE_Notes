@@ -1,9 +1,93 @@
-var user = 'iamarobot2';
-var repo = 'CSE_Notes';
+const user = 'iamarobot2';
+const repo = 'CSE_Notes';
 const uploadFunctionUrl = 'https://<your-project-name>.vercel.app/api/upload';
 const deleteFunctionUrl = 'https://<your-project-name>.vercel.app/api/delete';
+function validateFile(file) {
+  if (!file.type.startsWith('application/pdf')) {
+    alert('Please upload a PDF file.');
+    return false;
+  }
 
+  return true;
+}
+function showLoadingIndicator() {
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'loading-indicator';
+  loadingIndicator.innerHTML = 'Loading...';
 
+  document.body.appendChild(loadingIndicator);
+}
+function hideLoadingIndicator() {
+  const loadingIndicator = document.querySelector('.loading-indicator');
+  if (loadingIndicator) {
+    document.body.removeChild(loadingIndicator);
+  }
+}
+function handleError(error) {
+  console.error(error);
+
+  if (error instanceof TypeError) {
+    alert('An error occurred while uploading or deleting the file.');
+  } else if (error instanceof NetworkError) {
+    alert('A network error occurred while uploading or deleting the file.');
+  } else {
+    alert('An unknown error occurred while uploading or deleting the file.');
+  }
+}
+async function deleteFile(path, sha) {
+  try {
+    showLoadingIndicator();
+
+    const response = await fetch(deleteFunctionUrl, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.VERCEL_GITHUB_TOKEN
+      },
+      body: JSON.stringify({
+        path: path,
+        sha: sha
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete file: ' + response.status);
+    }
+
+    hideLoadingIndicator();
+  } catch (error) {
+    hideLoadingIndicator();
+    handleError(error);
+  }
+}
+async function uploadFile(file) {
+  try {
+    if (!validateFile(file)) {
+      return;
+    }
+
+    showLoadingIndicator();
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(uploadFunctionUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.VERCEL_GITHUB_TOKEN
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload file: ' + response.status);
+    }
+
+    hideLoadingIndicator();
+  } catch (error) {
+    hideLoadingIndicator();
+    handleError(error);
+  }
+}
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
     .then(response => response.json())
     .then(data => {
@@ -30,7 +114,7 @@ fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
         document.getElementById('searchButton').addEventListener('click', searchNotes);
     });
 
-    function deleteFile(path, sha) {
+    /*function deleteFile(path, sha) {
         var confirmDelete = confirm('Are you sure you want to delete this file?');
         if (confirmDelete) {
             var data = {
@@ -99,9 +183,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
         });
     };
     reader.readAsDataURL(file);
-});
-
-
+});*/
 function searchNotes() {
     var searchQuery = document.getElementById('search').value.toLowerCase();
     var cards = document.getElementsByClassName('card');
@@ -132,6 +214,3 @@ document.getElementById('logoutButton').addEventListener('click', function() {
     location.reload();
     this.style.display = 'none';
 });
-
-
-
