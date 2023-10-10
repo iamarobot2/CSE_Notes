@@ -1,7 +1,7 @@
 const user = 'iamarobot2';
 const repo = 'CSE_Notes';
-const uploadFunctionUrl = 'https://<your-project-name>.vercel.app/api/upload';
-const deleteFunctionUrl = 'https://<your-project-name>.vercel.app/api/delete';
+const uploadFunctionUrl = 'https://csenotes.vercel.app/api/upload';
+const deleteFunctionUrl = 'https://csenotes.vercel.app/api/delete';
 
 function validateFile(file) {
   if (!file.type.startsWith('application/pdf')) {
