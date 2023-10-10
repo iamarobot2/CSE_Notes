@@ -1,9 +1,3 @@
-const DotenvWebpackPlugin = require('dotenv-webpack');
-module.exports = {
-    plugins: [
-    new DotenvWebpackPlugin()
-  ]
-};
 const yourToken = process.env.CSE_TOKEN;
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
