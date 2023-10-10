@@ -1,6 +1,7 @@
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
-var yourToken = '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';
+const uploadFunctionUrl = 'https://<your-project-name>.vercel.app/api/upload';
+const deleteFunctionUrl = 'https://<your-project-name>.vercel.app/api/delete';
 
 
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
