@@ -1,4 +1,4 @@
-fetch('https://cse-notes.vercel.app/token')
+fetch('https://csenotesbackend.vercel.app//token')
   .then(response => response.json())
   .then(data => {
     const yourToken = data.token;

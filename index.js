@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3500;
 
-const CSE_TOKEN = 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
+const CSE_TOKEN = process.vercel.CSE_TOKEN;
 
 app.get('/token', (req, res) => {
   res.json({
