@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const CSE_TOKEN = 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
+const CSE_TOKEN = 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
 
 app.get('/token', (req, res) => {
   res.json({
