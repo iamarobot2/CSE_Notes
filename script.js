@@ -1,4 +1,9 @@
-const yourToken = process.env.CSE_TOKEN;
+fetch('https://cse-notes.vercel.app/token')
+  .then(response => response.json())
+  .then(data => {
+    const yourToken = data.token;
+  });
+
 var user = 'iamarobot2';
 var repo = 'CSE_Notes';
 fetch('https://api.github.com/repos/iamarobot2/CSE_Notes/contents/notes')
